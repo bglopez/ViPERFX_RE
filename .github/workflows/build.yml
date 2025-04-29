@@ -40,10 +40,11 @@ jobs:
         if: steps.ndk-cache.outputs.cache-hit != 'true'
         run: |
           echo "y" | sudo ${ANDROID_SDK_ROOT}/cmdline-tools/latest/bin/sdkmanager --install "ndk;${{ env.NDK_VERSION }}"
-          mv $ANDROID_HOME/ndk/${{ env.NDK_VERSION }} ndk
 
       - name: Set NDK environment variable
-        run: echo "ANDROID_NDK_HOME=$(pwd)/ndk" >> $GITHUB_ENV
+        run: |
+          echo "export ANDROID_NDK=${ANDROID_SDK_ROOT}/ndk/${NDK_VERSION}" >> $GITHUB_ENV
+          echo "export ANDROID_NDK_HOME=${ANDROID_SDK_ROOT}/ndk/${NDK_VERSION}" >> $GITHUB_ENV
 
       - name: Build with CMake
         run: |
