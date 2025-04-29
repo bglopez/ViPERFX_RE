@@ -8,7 +8,7 @@ on:
       branch:
         description: 'Branch to build'
         required: true
-        default: 'rewrite-continued'
+        default: 'aidl'
 
 env:
   NDK_VERSION: 25.2.9519653
@@ -20,7 +20,7 @@ jobs:
 
     strategy:
       matrix:
-        abi: ['armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64']
+        abi: ['armeabi-v7a', 'arm64-v8a']
 
     steps:
       - uses: actions/checkout@v3
