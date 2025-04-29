@@ -39,7 +39,7 @@ jobs:
       - name: Install NDK
         if: steps.ndk-cache.outputs.cache-hit != 'true'
         run: |
-          echo "y" | sudo ${ANDROID_HOME}/tools/bin/sdkmanager --install "ndk;${{ env.NDK_VERSION }}"
+          echo "y" | sudo ${ANDROID_SDK_ROOT}/cmdline-tools/latest/bin/sdkmanager --install "ndk;${{ env.NDK_VERSION }}"
           mv $ANDROID_HOME/ndk/${{ env.NDK_VERSION }} ndk
 
       - name: Set NDK environment variable
