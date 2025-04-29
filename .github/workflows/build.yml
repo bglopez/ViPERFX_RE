@@ -74,12 +74,15 @@ jobs:
       - name: Download compiled libraries
         uses: actions/download-artifact@v4
         with:
-          path: compiled/
+          pattern: compiled-binaries-*
+          path: compiled
+          merge-multiple: true
 
+      - run: ls -R compiled
       # Prepare Magisk module directory by copying the necessary ABI files
       - name: Prepare Magisk Module
         run: |
-          for abi in armeabi-v7a arm64-v8a x86 x86_64; do
+          for abi in armeabi-v7a arm64-v8a; do
             mkdir -p module/common/files
             cp compiled/libv4a_re_$abi.so module/common/files/
           done
