@@ -1,6 +1,14 @@
 name: build
 
-on: [push, pull_request]
+on: 
+  push:
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: 'Branch to build'
+        required: true
+        default: 'rewrite-continued'
 
 env:
   NDK_VERSION: 25.2.9519653
@@ -16,6 +24,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.inputs.branch }}
 
       - name: Cache NDK
         id: ndk-cache
